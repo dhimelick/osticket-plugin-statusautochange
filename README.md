@@ -12,10 +12,6 @@ This plugin has only one setting: the status which you'd like a ticket to become
 
 Once you've added a status, save your changes, then enable the plugin.
 
-## In use
-When this plugin is working, you'll see something like when when a client replies:
-
-
 ## Credits
 - https://github.com/clonemeagain/osticket-slack was immensely helpful as a starting point and for the `getTicket` method.
 - https://github.com/poctob/OSTEquipmentPlugin/wiki/Plugin-Development-Introduction
