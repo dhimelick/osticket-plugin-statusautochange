@@ -1,5 +1,5 @@
 # [osTicket](https://osticket.com) Plugin: Ticket Status Auto-changer
-Ticket Status Auto-changer is a plugin for osTicket that allows you to automatically change the status of a ticket when a client replies. It has been tested and works on osTicket versions 1.11 through 1.14. It may work on later versions but has not been tested.
+Ticket Status Auto-changer is a plugin for osTicket that allows you to automatically change the status of a ticket when a client replies. It has been tested and works on osTicket versions 1.11 through 1.15. It may work on later versions but has not been tested.
 
 ## Installation
 1. Download as a zip and extract into `/include/plugins/statusautochange`.
