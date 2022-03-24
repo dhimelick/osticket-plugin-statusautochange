@@ -38,7 +38,7 @@ class StatusAutoChangePlugin extends Plugin {
         // need to fetch the ticket from the ThreadEntry
         $ticket = $this->getTicket($entry);
         if (!$ticket instanceof Ticket) {
-            // Admin created ticket's won't work here.
+            // Admin created tickets won't work here.
             return;
         }
         // check to make sure this entry isn't the first (ie: a New ticket)
@@ -48,7 +48,7 @@ class StatusAutoChangePlugin extends Plugin {
         }
         // change status based on config
         $new_status = TicketStatus::lookup($this->getConfig()->get('clientReplyStatus'));
-        if ($ticket->getStatusId() != $new_status->getId()) {
+        if (!is_null($new_status) && $ticket->getStatusId() != $new_status->getId()) {
             $ticket->setStatus($new_status);
         }
     }

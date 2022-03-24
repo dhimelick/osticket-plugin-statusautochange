@@ -18,9 +18,15 @@ class StatusAutoChangePluginConfig extends PluginConfig {
         foreach (TicketStatusList::getStatuses(array('states' => array('open', 'closed'))) as $s) {
             $statuses[$s->getId()] = $s->getName();
         }
+		
+		$default = '';
+		if (count($statuses) > 0) {
+			$default = array_key_first($statuses);
+		}
+
         return array(
             'clientReplyStatus' => new ChoiceField(array(
-                'default' => 0,
+                'default' => $default,
                 'label' => 'When a client replies, status becomes',
                 'choices' => $statuses
             ))
