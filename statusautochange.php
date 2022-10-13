@@ -80,8 +80,7 @@ class StatusAutoChangePlugin extends Plugin {
      *
      * @see Plugin::uninstall()
      */
-    function uninstall() {
-        $errors = array ();
+    function uninstall(&$errors) {
         parent::uninstall ( $errors );
     }
 }
