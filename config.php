@@ -5,7 +5,7 @@ require_once INCLUDE_DIR . 'class.list.php';
 
 class StatusAutoChangePluginConfig extends PluginConfig {
 
-    function pre_save($config, &$errors) {
+    function pre_save(&$config, &$errors) {
         if ($config['clientReplyStatus'] == '') {
             $errors['err'] = 'You must select a status.';
             return FALSE;
