@@ -1,11 +1,16 @@
 # [osTicket](https://osticket.com) Plugin: Ticket Status Auto-changer
-Ticket Status Auto-changer is a plugin for osTicket that allows you to automatically change the status of a ticket when a client replies. It has been tested and works on osTicket versions 1.11 through 1.15. It may work on later versions but has not been tested.
+Ticket Status Auto-changer is a plugin for osTicket that allows you to automatically change the status of a ticket when a customer replies.
+
+## Compatibility
+Version 2.x is compatible with osTicket 1.17 and PHP 8.
+
+Version 1.0 is compatible with osTicket 1.11-1.15 and PHP 7.
 
 ## Installation
-1. Download as a zip and extract into `/include/plugins/statusautochange`.
+1. Download from [Releases](https://github.com/dhimelick/osticket-plugin-statusautochange/releases), unzip, and copy the folder containing the PHP files into `/include/plugins/`.
 2. In the admin panel, go to **Manage > Plugins**.
 3. Click **Add New Plugin**.
-4. Click **Install** next to "Ticket Status Auto-changer."
+4. Click **Install** next to "Ticket Status Auto-changer".
 
 ## Configuration
 This plugin has only one setting: the status which you'd like a ticket to become when a client replies. You can choose any status that is an "open" or "closed" state.
