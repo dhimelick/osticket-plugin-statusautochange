@@ -1,7 +1,7 @@
 <?php
 return array(
     'id'          => 'osticket:statusautochange',
-    'version'     => '0.1',
+    'version'     => '2.0.0',
     'name'        => 'Ticket Status Auto-changer',
     'author'      => 'David Himelick',
     'description' => 'Automatically change ticket status when a client replies.',
