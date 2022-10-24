@@ -32,9 +32,16 @@ class StatusAutoChangePlugin extends Plugin {
             return;
         }
         if (!$entry instanceof MessageThreadEntry) {
-            // this was a reply or a system entry, not a message from a user
+            // this is a reply or a system entry, not a message from a user
             return;
         }
+        $threadType = Thread::objects()->filter([
+			'id' => $entry->getThreadId()
+		])->values_flat('object_type')->first() [0];
+		if ($threadType != "T") {
+			// this is not a ticket thread
+			return;
+		}
         // need to fetch the ticket from the ThreadEntry
         $ticket = $this->getTicket($entry);
         if (!$ticket instanceof Ticket) {
@@ -63,14 +70,11 @@ class StatusAutoChangePlugin extends Plugin {
      */
     function getTicket(ThreadEntry $entry) {
         $ticket_id = Thread::objects()->filter([
-                    'id' => $entry->getThreadId()
-                ])->values_flat('object_id')->first() [0];
-        // Force lookup rather than use cached data..
-        // This ensures we get the full ticket, with all
-        // thread entries etc.. 
-        return Ticket::lookup(array(
-                    'ticket_id' => $ticket_id
-        ));
+            'id' => $entry->getThreadId()
+        ])->values_flat('object_id')->first() [0];
+        // Force lookup rather than use cached data to ensure we get the full
+        // ticket with all thread entries, etc.
+        return Ticket::lookup(array('ticket_id' => $ticket_id));
     }
 
     /**
