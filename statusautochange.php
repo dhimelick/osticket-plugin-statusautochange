@@ -65,10 +65,19 @@ Class StatusAutoChangeBackend {
         if ($entry->getId() == $firstEntry->getId()) {
             return;
         }
-    
-        $newStatus = TicketStatus::lookup($this->config->get('clientReplyStatus'));
-        if (!is_null($newStatus) && $ticket->getStatusId() != $newStatus->getId()) {
-            $ticket->setStatus($newStatus);
+        
+        $toStatus = TicketStatus::lookup($this->config->get('toStatus'));
+        if ($this->config->get('fromStatus') != '') {
+            // change status only if it is currently $fromStatus
+            $fromStatus = TicketStatus::lookup($this->config->get('fromStatus'));
+            if (!is_null($toStatus) && $ticket->getStatusId() == $fromStatus->getId()) {
+                $ticket->setStatus($toStatus);
+            }
+        } else {
+            // change status regardless of current status
+            if (!is_null($toStatus)) {
+                $ticket->setStatus($toStatus);
+            }
         }
     }
     

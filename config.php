@@ -6,7 +6,7 @@ require_once INCLUDE_DIR . 'class.list.php';
 class StatusAutoChangePluginConfig extends PluginConfig {
 
     function pre_save(&$config, &$errors) {
-        if ($config['clientReplyStatus'] == '') {
+        if ($config['toStatus'] == '') {
             $errors['err'] = 'You must select a status.';
             return FALSE;
         }
@@ -14,21 +14,37 @@ class StatusAutoChangePluginConfig extends PluginConfig {
     }
 
     function getOptions() {
-        $statuses = array();
+        $fromStatuses = array('' => 'Any');
         foreach (TicketStatusList::getStatuses(array('states' => array('open', 'closed'))) as $s) {
-            $statuses[$s->getId()] = $s->getName();
+            $fromStatuses[$s->getId()] = $s->getName();
         }
 		
-		$default = '';
-		if (count($statuses) > 0) {
-			$default = array_key_first($statuses);
+		$fromDefault = '';
+
+        $toStatuses = array();
+        foreach (TicketStatusList::getStatuses(array('states' => array('open', 'closed'))) as $s) {
+            $toStatuses[$s->getId()] = $s->getName();
+        }
+		
+		$toDefault = '';
+		if (count($toStatuses) > 0) {
+			$toDefault = array_key_first($toStatuses);
 		}
 
         return array(
-            'clientReplyStatus' => new ChoiceField(array(
-                'default' => $default,
-                'label' => 'When a client replies, status becomes',
-                'choices' => $statuses
+            'header' => new SectionBreakField(array(
+                'label' => 'Ticket Status Auto-changer',
+                'hint' => 'When a customer replies...'
+            )),
+            'fromStatus' => new ChoiceField(array(
+                'default' => $fromDefault,
+                'label' => 'Change status if original status is',
+                'choices' => $fromStatuses
+            )),
+            'toStatus' => new ChoiceField(array(
+                'default' => $toDefault,
+                'label' => 'Change status to',
+                'choices' => $toStatuses
             ))
         );
     }
